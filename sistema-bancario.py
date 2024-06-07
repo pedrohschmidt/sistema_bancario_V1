@@ -33,7 +33,8 @@ def validar_deposito(valor_deposito):
     return valor_deposito
 
 
-def validar_saque(valor_saque, saldo):
+def validar_saque(valor_saque):
+    global saldo
     # Valida se o valor do saque é positivo e menor do que 500
     while valor_saque <= 0 or valor_saque > limite_por_operacao:
         valor_saque = float(input(f"Você não pode sacar um valor nulo ou negativo, e também não pode sacar mais de R${limite_por_operacao} por operação. Por favor digite um valor válido para saque: "))
@@ -79,7 +80,7 @@ while opcao != "00000":
     elif opcao == "s":
         # Realiza saque
         valor_do_saque = float(input("Digite o valor a ser sacado: "))
-        teste_de_valor, valor_a_ser_sacado = validar_saque(valor_do_saque, saldo)
+        teste_de_valor, valor_a_ser_sacado = validar_saque(valor_do_saque)
         teste_de_limite, saques_feitos_hoje, data_ultimo_saque = validar_limite_trx_diario(data_hoje, data_ultimo_saque, limite_saques_diarios, saques_feitos_hoje)
         if teste_de_valor == True and teste_de_limite == True:
             data_ultimo_saque = data_hoje
